@@ -1,0 +1,8 @@
+# Ignorar archivos de sistema y temporales
+.DS_Store
+Thumbs.db
+*~
+*.bak
+
+# Permitimos explicitamente los .hex (aunque por defecto git no los ignora, es bueno saber que NO estan aqui)
+# NO agregar *.hex aqui
