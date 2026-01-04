@@ -93,7 +93,7 @@ _______, LGUI_T(KC_MINS), LALT_T(KC_EQL), LCTL_T(KC_LCBR), LSFT_T(KC_RCBR), KC_B
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
     _______, KC_MPLY, KC_MPRV, KC_MNXT, KC_MUTE, KC_VOLD,                   KC_VOLU, RM_TOGG, RM_SATU, RM_VALU, RM_HUEU, RM_NEXT,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, RM_SATD, RM_VALD, RM_HUED, RM_NEXT, XXXXXXX,
+     _______, KC_PSCR, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, RM_SATD, RM_VALD, RM_HUED, RM_NEXT, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_LGUI, _______,  KC_SPC,     KC_ENT, _______, KC_RALT
                                       //`--------------------------'  `--------------------------'

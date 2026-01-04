@@ -103,7 +103,7 @@ qmk flash -kb crkbd -km Yariel
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | **0-5** | F1 | F2 | F3 | F4 | F5 | F6 | | F7 | F8 | F9 | F10 | F11 | F12 |
 | **6-11** | . | PLAY | PREV | NEXT | MUTE | VOL- | | VOL+ | RGB_TG | SAT+ | VAL+ | HUE+ | MOD+ |
-| **12-17** | . | . | . | . | . | . | | . | SAT- | VAL- | HUE- | MOD- | . |
+| **12-17** | . | PSCR | . | . | . | . | | . | SAT- | VAL- | HUE- | MOD- | . |
 | **Thmb** | | | **GUI** | . | **SPC** | | **ENT** | . | **RALT** | | | |
 
 ### Capa 4: Administración & Mouse
