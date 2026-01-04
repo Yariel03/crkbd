@@ -24,13 +24,13 @@
             max-width: 1000px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            page-break-inside: avoid; /* Evita que una capa se corte al imprimir */
+            page-break-inside: avoid;
         }
 
         .layer-title {
             font-size: 1.2em;
             font-weight: bold;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             text-transform: uppercase;
             border-bottom: 2px solid #ddd;
             display: inline-block;
@@ -40,20 +40,20 @@
         .keyboard {
             display: flex;
             justify-content: center;
-            gap: 60px; /* Separación entre mitades */
+            gap: 40px;
             align-items: flex-start;
         }
 
         .half {
             display: grid;
-            grid-template-columns: repeat(6, 50px);
-            grid-template-rows: repeat(3, 50px) 50px;
-            gap: 5px;
+            grid-template-columns: repeat(6, 55px);
+            grid-template-rows: repeat(3, 55px) 55px;
+            gap: 6px;
         }
 
         .key {
-            width: 50px;
-            height: 50px;
+            width: 55px;
+            height: 55px;
             background: #fff;
             border: 1px solid #333;
             border-radius: 6px;
@@ -61,33 +61,36 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            font-size: 0.8em;
             position: relative;
             box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
         }
 
+        .key-index {
+            position: absolute;
+            top: 2px;
+            left: 4px;
+            font-size: 0.55em;
+            color: #999;
+            font-weight: normal;
+        }
+
         .key.transparent {
-            border: 1px dashed #ccc;
+            border: 1px dashed #ddd;
             color: #ccc;
             background: #fafafa;
             box-shadow: none;
         }
 
-        .key.hold {
-            background-color: #e3f2fd; /* Azul muy claro para Hold */
-        }
-
-        .key.layer-mod {
-            background-color: #f3e5f5; /* Morado claro para cambio de capa */
-        }
-
-        .key.mod {
-            background-color: #fff3e0; /* Naranja claro para modificadores */
-        }
+        .key.hold { background-color: #e3f2fd; }
+        .key.layer-mod { background-color: #f3e5f5; border-color: #8e24aa; }
+        .key.mod { background-color: #fff3e0; }
+        .key.admin { background-color: #ffebee; }
 
         .main-legend {
             font-weight: bold;
-            font-size: 1em;
+            font-size: 0.9em;
+            line-height: 1.1;
+            text-align: center;
         }
 
         .sub-legend {
@@ -96,41 +99,13 @@
             margin-top: 2px;
         }
 
-        /* Posicionamiento de los pulgares (Thumb clusters) */
-        /* Corne: 3 teclas de pulgar. 
-           Izquierda: columnas 4, 5, 6 de una 4ta fila virtual.
-           Derecha: columnas 1, 2, 3 de una 4ta fila virtual.
-        */
-        
-        .thumb-key {
-            margin-top: 10px; /* Separar un poco del bloque principal */
-        }
+        .half.left .thumb-spacer { grid-column: span 3; visibility: hidden; }
+        .half.right .thumb-spacer { grid-column: span 3; visibility: hidden; }
 
-        /* Lado Izquierdo Thumbs: Ocupan las ultimas 3 celdas de la fila 4 */
-        .half.left .thumb-placeholder {
-            grid-column: span 3; 
-            visibility: hidden; /* Espacio vacío */
-        }
-
-        /* Lado Derecho Thumbs: Ocupan las primeras 3 celdas de la fila 4 */
-        .half.right .thumb-placeholder {
-            grid-column: span 3;
-            visibility: hidden; /* Espacio vacío */
-        }
-
-        .combos-info {
-            margin-top: 10px;
-            font-size: 0.8em;
-            background: #fff8e1;
-            padding: 5px;
-            border-radius: 4px;
-            display: inline-block;
-        }
-
-        /* Estilos específicos de impresión */
         @media print {
             body { background: white; padding: 0; }
-            .layer-container { box-shadow: none; border: 1px solid #ccc; margin-bottom: 20px; }
+            .layer-container { box-shadow: none; border: 1px solid #ccc; margin-bottom: 20px; page-break-after: always; }
+            .layer-container:last-child { page-break-after: auto; }
             .no-print { display: none; }
             .key { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
@@ -145,16 +120,14 @@
             margin-bottom: 20px;
             border-radius: 5px;
         }
-        .print-btn:hover { background: #555; }
-
     </style>
 </head>
 <body>
 
     <div class="no-print">
-        <h1>Diseño de Teclado Corne - Yariel</h1>
-        <p>Configuración generada desde keymap.c</p>
-        <button class="print-btn" onclick="window.print()">🖨️ Imprimir a PDF</button>
+        <h1>Diseño Corne - Yariel</h1>
+        <p>Configuración v2.1 - Números en Capa de Símbolos</p>
+        <button class="print-btn" onclick="window.print()">🖨️ Imprimir PDF</button>
     </div>
 
     <!-- LAYER 0: QWERTY -->
@@ -162,354 +135,318 @@
         <div class="layer-title">Capa 0: QWERTY (Base)</div>
         <div class="keyboard">
             <div class="half left">
-                <!-- Row 1 -->
-                <div class="key mod"><div class="main-legend">ESC</div></div>
-                <div class="key"><div class="main-legend">Q</div></div>
-                <div class="key"><div class="main-legend">W</div></div>
-                <div class="key"><div class="main-legend">E</div></div>
-                <div class="key"><div class="main-legend">R</div></div>
-                <div class="key"><div class="main-legend">T</div></div>
-                
-                <!-- Row 2 -->
-                <div class="key mod"><div class="main-legend">TAB</div></div>
-                <div class="key hold"><div class="main-legend">A</div><div class="sub-legend">GUI</div></div>
-                <div class="key hold"><div class="main-legend">S</div><div class="sub-legend">ALT</div></div>
-                <div class="key hold"><div class="main-legend">D</div><div class="sub-legend">CTL</div></div>
-                <div class="key hold"><div class="main-legend">F</div><div class="sub-legend">SFT</div></div>
-                <div class="key"><div class="main-legend">G</div></div>
-
-                <!-- Row 3 -->
-                <div class="key mod"><div class="main-legend">SFT</div></div>
-                <div class="key"><div class="main-legend">Z</div></div>
-                <div class="key"><div class="main-legend">X</div></div>
-                <div class="key"><div class="main-legend">C</div></div>
-                <div class="key"><div class="main-legend">V</div></div>
-                <div class="key"><div class="main-legend">B</div></div>
-
+                <!-- R1 -->
+                <div class="key mod"><span class="key-index">0</span><div class="main-legend">ESC</div></div>
+                <div class="key"><span class="key-index">1</span><div class="main-legend">Q</div></div>
+                <div class="key"><span class="key-index">2</span><div class="main-legend">W</div></div>
+                <div class="key"><span class="key-index">3</span><div class="main-legend">E</div></div>
+                <div class="key"><span class="key-index">4</span><div class="main-legend">R</div></div>
+                <div class="key"><span class="key-index">5</span><div class="main-legend">T</div></div>
+                <!-- R2 -->
+                <div class="key mod"><span class="key-index">6</span><div class="main-legend">TAB</div></div>
+                <div class="key hold"><span class="key-index">7</span><div class="main-legend">A</div><div class="sub-legend">GUI</div></div>
+                <div class="key hold"><span class="key-index">8</span><div class="main-legend">S</div><div class="sub-legend">ALT</div></div>
+                <div class="key hold"><span class="key-index">9</span><div class="main-legend">D</div><div class="sub-legend">CTL</div></div>
+                <div class="key hold"><span class="key-index">10</span><div class="main-legend">F</div><div class="sub-legend">SFT</div></div>
+                <div class="key"><span class="key-index">11</span><div class="main-legend">G</div></div>
+                <!-- R3 -->
+                <div class="key mod"><span class="key-index">12</span><div class="main-legend">SFT</div></div>
+                <div class="key"><span class="key-index">13</span><div class="main-legend">Z</div></div>
+                <div class="key"><span class="key-index">14</span><div class="main-legend">X</div></div>
+                <div class="key"><span class="key-index">15</span><div class="main-legend">C</div></div>
+                <div class="key"><span class="key-index">16</span><div class="main-legend">V</div></div>
+                <div class="key"><span class="key-index">17</span><div class="main-legend">B</div></div>
                 <!-- Thumbs -->
-                <div class="thumb-placeholder"></div>
-                <div class="key thumb-key mod"><div class="main-legend">GUI</div></div>
-                <div class="key thumb-key layer-mod"><div class="main-legend">L1</div><div class="sub-legend">Num</div></div>
-                <div class="key thumb-key"><div class="main-legend">SPC</div></div>
+                <div class="thumb-spacer"></div>
+                <div class="key thumb-key mod"><span class="key-index">36</span><div class="main-legend">GUI</div></div>
+                <div class="key thumb-key layer-mod"><span class="key-index">37</span><div class="main-legend">MO(1)</div><div class="sub-legend">Num</div></div>
+                <div class="key thumb-key"><span class="key-index">38</span><div class="main-legend">SPC</div></div>
             </div>
 
             <div class="half right">
-                <!-- Row 1 -->
-                <div class="key"><div class="main-legend">Y</div></div>
-                <div class="key"><div class="main-legend">U</div></div>
-                <div class="key"><div class="main-legend">I</div></div>
-                <div class="key"><div class="main-legend">O</div></div>
-                <div class="key"><div class="main-legend">P</div></div>
-                <div class="key mod"><div class="main-legend">BKSP</div></div>
-
-                <!-- Row 2 -->
-                <div class="key"><div class="main-legend">H</div></div>
-                <div class="key hold"><div class="main-legend">J</div><div class="sub-legend">SFT</div></div>
-                <div class="key hold"><div class="main-legend">K</div><div class="sub-legend">CTL</div></div>
-                <div class="key hold"><div class="main-legend">L</div><div class="sub-legend">ALT</div></div>
-                <div class="key hold"><div class="main-legend">;</div><div class="sub-legend">GUI</div></div>
-                <div class="key"><div class="main-legend">'</div></div>
-
-                <!-- Row 3 -->
-                <div class="key"><div class="main-legend">N</div></div>
-                <div class="key"><div class="main-legend">M</div></div>
-                <div class="key"><div class="main-legend">,</div></div>
-                <div class="key"><div class="main-legend">.</div></div>
-                <div class="key"><div class="main-legend">/</div></div>
-                <div class="key layer-mod"><div class="main-legend">L3</div><div class="sub-legend">FN</div></div>
-
+                <!-- R1 -->
+                <div class="key"><span class="key-index">18</span><div class="main-legend">Y</div></div>
+                <div class="key"><span class="key-index">19</span><div class="main-legend">U</div></div>
+                <div class="key"><span class="key-index">20</span><div class="main-legend">I</div></div>
+                <div class="key"><span class="key-index">21</span><div class="main-legend">O</div></div>
+                <div class="key"><span class="key-index">22</span><div class="main-legend">P</div></div>
+                <div class="key mod"><span class="key-index">23</span><div class="main-legend">BSPC</div></div>
+                <!-- R2 -->
+                <div class="key"><span class="key-index">24</span><div class="main-legend">H</div></div>
+                <div class="key hold"><span class="key-index">25</span><div class="main-legend">J</div><div class="sub-legend">SFT</div></div>
+                <div class="key hold"><span class="key-index">26</span><div class="main-legend">K</div><div class="sub-legend">CTL</div></div>
+                <div class="key hold"><span class="key-index">27</span><div class="main-legend">L</div><div class="sub-legend">ALT</div></div>
+                <div class="key hold"><span class="key-index">28</span><div class="main-legend">;</div><div class="sub-legend">GUI</div></div>
+                <div class="key"><span class="key-index">29</span><div class="main-legend">'</div></div>
+                <!-- R3 -->
+                <div class="key"><span class="key-index">30</span><div class="main-legend">N</div></div>
+                <div class="key"><span class="key-index">31</span><div class="main-legend">M</div></div>
+                <div class="key"><span class="key-index">32</span><div class="main-legend">,</div></div>
+                <div class="key"><span class="key-index">33</span><div class="main-legend">.</div></div>
+                <div class="key"><span class="key-index">34</span><div class="main-legend">/</div></div>
+                <div class="key layer-mod"><span class="key-index">35</span><div class="main-legend">MO(3)</div><div class="sub-legend">FN</div></div>
                 <!-- Thumbs -->
-                <div class="key thumb-key"><div class="main-legend">ENT</div></div>
-                <div class="key thumb-key layer-mod"><div class="main-legend">L2</div><div class="sub-legend">Sym</div></div>
-                <div class="key thumb-key mod"><div class="main-legend">RALT</div></div>
-                <div class="thumb-placeholder"></div>
+                <div class="key thumb-key"><span class="key-index">39</span><div class="main-legend">ENT</div></div>
+                <div class="key thumb-key layer-mod"><span class="key-index">40</span><div class="main-legend">MO(2)</div><div class="sub-legend">Sym</div></div>
+                <div class="key thumb-key mod"><span class="key-index">41</span><div class="main-legend">RALT</div></div>
+                <div class="thumb-spacer"></div>
             </div>
-        </div>
-        <div class="combos-info">
-            <b>Combos:</b> H + J = Backspace | . + / = Flecha "=>"
         </div>
     </div>
 
-    <!-- LAYER 1: CALCULATOR / NUMPAD -->
+    <!-- LAYER 1: NUMPAD -->
     <div class="layer-container">
-        <div class="layer-title">Capa 1: Calculadora / Numérico</div>
+        <div class="layer-title">Capa 1: Numérico & Calculadora</div>
         <div class="keyboard">
             <div class="half left">
-                <!-- Row 1 -->
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-                
-                <!-- Row 2 -->
-                <div class="key"><div class="main-legend">CAPS</div></div>
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-
-                <!-- Row 3 -->
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-
+                <!-- R1 -->
+                <div class="key transparent"><span class="key-index">0</span></div>
+                <div class="key transparent"><span class="key-index">1</span></div>
+                <div class="key transparent"><span class="key-index">2</span></div>
+                <div class="key transparent"><span class="key-index">3</span></div>
+                <div class="key transparent"><span class="key-index">4</span></div>
+                <div class="key transparent"><span class="key-index">5</span></div>
+                <!-- R2 -->
+                <div class="key mod"><span class="key-index">6</span><div class="main-legend">CAPS</div></div>
+                <div class="key transparent"><span class="key-index">7</span></div>
+                <div class="key transparent"><span class="key-index">8</span></div>
+                <div class="key transparent"><span class="key-index">9</span></div>
+                <div class="key transparent"><span class="key-index">10</span></div>
+                <div class="key transparent"><span class="key-index">11</span></div>
+                <!-- R3 -->
+                <div class="key transparent"><span class="key-index">12</span></div>
+                <div class="key transparent"><span class="key-index">13</span></div>
+                <div class="key transparent"><span class="key-index">14</span></div>
+                <div class="key transparent"><span class="key-index">15</span></div>
+                <div class="key transparent"><span class="key-index">16</span></div>
+                <div class="key transparent"><span class="key-index">17</span></div>
                 <!-- Thumbs -->
-                <div class="thumb-placeholder"></div>
-                <div class="key thumb-key transparent"></div>
-                <div class="key thumb-key transparent"></div>
-                <div class="key thumb-key"><div class="main-legend">SPC</div></div>
+                <div class="thumb-spacer"></div>
+                <div class="key transparent"><span class="key-index">36</span></div>
+                <div class="key transparent"><span class="key-index">37</span></div>
+                <div class="key"><span class="key-index">38</span><div class="main-legend">SPC</div></div>
             </div>
 
             <div class="half right">
-                <!-- Row 1 -->
-                <div class="key"><div class="main-legend">NUM</div></div>
-                <div class="key"><div class="main-legend">7</div></div>
-                <div class="key"><div class="main-legend">8</div></div>
-                <div class="key"><div class="main-legend">9</div></div>
-                <div class="key"><div class="main-legend">*</div></div>
-                <div class="key"><div class="main-legend">DEL</div></div>
-
-                <!-- Row 2 -->
-                <div class="key transparent"></div>
-                <div class="key"><div class="main-legend">4</div></div>
-                <div class="key"><div class="main-legend">5</div></div>
-                <div class="key"><div class="main-legend">6</div></div>
-                <div class="key"><div class="main-legend">+</div></div>
-                <div class="key"><div class="main-legend">-</div></div>
-
-                <!-- Row 3 -->
-                <div class="key transparent"></div>
-                <div class="key"><div class="main-legend">1</div></div>
-                <div class="key"><div class="main-legend">2</div></div>
-                <div class="key"><div class="main-legend">3</div></div>
-                <div class="key"><div class="main-legend">.</div></div>
-                <div class="key"><div class="main-legend">/</div></div>
-
+                <!-- R1 -->
+                <div class="key"><span class="key-index">18</span><div class="main-legend">NUM</div></div>
+                <div class="key"><span class="key-index">19</span><div class="main-legend">7</div></div>
+                <div class="key"><span class="key-index">20</span><div class="main-legend">8</div></div>
+                <div class="key"><span class="key-index">21</span><div class="main-legend">9</div></div>
+                <div class="key"><span class="key-index">22</span><div class="main-legend">*</div></div>
+                <div class="key mod"><span class="key-index">23</span><div class="main-legend">DEL</div></div>
+                <!-- R2 -->
+                <div class="key transparent"><span class="key-index">24</span></div>
+                <div class="key"><span class="key-index">25</span><div class="main-legend">4</div></div>
+                <div class="key"><span class="key-index">26</span><div class="main-legend">5</div></div>
+                <div class="key"><span class="key-index">27</span><div class="main-legend">6</div></div>
+                <div class="key"><span class="key-index">28</span><div class="main-legend">+</div></div>
+                <div class="key"><span class="key-index">29</span><div class="main-legend">-</div></div>
+                <!-- R3 -->
+                <div class="key transparent"><span class="key-index">30</span></div>
+                <div class="key"><span class="key-index">31</span><div class="main-legend">1</div></div>
+                <div class="key"><span class="key-index">32</span><div class="main-legend">2</div></div>
+                <div class="key"><span class="key-index">33</span><div class="main-legend">3</div></div>
+                <div class="key"><span class="key-index">34</span><div class="main-legend">.</div></div>
+                <div class="key"><span class="key-index">35</span><div class="main-legend">/</div></div>
                 <!-- Thumbs -->
-                <div class="key thumb-key"><div class="main-legend">ENT</div></div>
-                <div class="key thumb-key layer-mod"><div class="main-legend">L3</div></div>
-                <div class="key thumb-key"><div class="main-legend">0</div></div>
-                <div class="thumb-placeholder"></div>
+                <div class="key"><span class="key-index">39</span><div class="main-legend">ENT</div></div>
+                <div class="key layer-mod"><span class="key-index">40</span><div class="main-legend">MO(3)</div></div>
+                <div class="key"><span class="key-index">41</span><div class="main-legend">0</div></div>
+                <div class="thumb-spacer"></div>
             </div>
         </div>
     </div>
 
-    <!-- LAYER 2: SYMBOLS & NAV -->
+    <!-- LAYER 2: SYMBOLS (UPDATED) -->
     <div class="layer-container">
         <div class="layer-title">Capa 2: Símbolos & Navegación</div>
         <div class="keyboard">
             <div class="half left">
-                <!-- Row 1 -->
-                <div class="key"><div class="main-legend">`</div></div>
-                <div class="key"><div class="main-legend">!</div></div>
-                <div class="key"><div class="main-legend">@</div></div>
-                <div class="key"><div class="main-legend">#</div></div>
-                <div class="key"><div class="main-legend">$</div></div>
-                <div class="key"><div class="main-legend">%</div></div>
-                
-                <!-- Row 2 -->
-                <div class="key transparent"></div>
-                <div class="key hold"><div class="main-legend">-</div><div class="sub-legend">GUI</div></div>
-                <div class="key hold"><div class="main-legend">=</div><div class="sub-legend">ALT</div></div>
-                <div class="key hold"><div class="main-legend">{</div><div class="sub-legend">CTL</div></div>
-                <div class="key hold"><div class="main-legend">}</div><div class="sub-legend">SFT</div></div>
-                <div class="key"><div class="main-legend">\</div></div>
-
-                <!-- Row 3 -->
-                <div class="key transparent"></div>
-                <div class="key"><div class="main-legend">_</div></div>
-                <div class="key"><div class="main-legend">+</div></div>
-                <div class="key"><div class="main-legend">[</div></div>
-                <div class="key"><div class="main-legend">]</div></div>
-                <div class="key"><div class="main-legend">\</div></div>
-
+                <!-- R1 -->
+                <div class="key"><span class="key-index">0</span><div class="main-legend">`</div></div>
+                <div class="key"><span class="key-index">1</span><div class="main-legend">1</div><div class="sub-legend">!</div></div>
+                <div class="key"><span class="key-index">2</span><div class="main-legend">2</div><div class="sub-legend">@</div></div>
+                <div class="key"><span class="key-index">3</span><div class="main-legend">3</div><div class="sub-legend">#</div></div>
+                <div class="key"><span class="key-index">4</span><div class="main-legend">4</div><div class="sub-legend">$</div></div>
+                <div class="key"><span class="key-index">5</span><div class="main-legend">5</div><div class="sub-legend">%</div></div>
+                <!-- R2 -->
+                <div class="key transparent"><span class="key-index">6</span></div>
+                <div class="key hold"><span class="key-index">7</span><div class="main-legend">-</div><div class="sub-legend">GUI</div></div>
+                <div class="key hold"><span class="key-index">8</span><div class="main-legend">=</div><div class="sub-legend">ALT</div></div>
+                <div class="key hold"><span class="key-index">9</span><div class="main-legend">{</div><div class="sub-legend">CTL</div></div>
+                <div class="key hold"><span class="key-index">10</span><div class="main-legend">}</div><div class="sub-legend">SFT</div></div>
+                <div class="key"><span class="key-index">11</span><div class="main-legend">\</div></div>
+                <!-- R3 -->
+                <div class="key transparent"><span class="key-index">12</span></div>
+                <div class="key"><span class="key-index">13</span><div class="main-legend">_</div></div>
+                <div class="key"><span class="key-index">14</span><div class="main-legend">+</div></div>
+                <div class="key"><span class="key-index">15</span><div class="main-legend">[</div></div>
+                <div class="key"><span class="key-index">16</span><div class="main-legend">]</div></div>
+                <div class="key"><span class="key-index">17</span><div class="main-legend">\</div></div>
                 <!-- Thumbs -->
-                <div class="thumb-placeholder"></div>
-                <div class="key thumb-key mod"><div class="main-legend">GUI</div></div>
-                <div class="key thumb-key layer-mod"><div class="main-legend">L3</div></div>
-                <div class="key thumb-key"><div class="main-legend">SPC</div></div>
+                <div class="thumb-spacer"></div>
+                <div class="key mod"><span class="key-index">36</span><div class="main-legend">GUI</div></div>
+                <div class="key layer-mod"><span class="key-index">37</span><div class="main-legend">MO(3)</div></div>
+                <div class="key"><span class="key-index">38</span><div class="main-legend">SPC</div></div>
             </div>
 
             <div class="half right">
-                <!-- Row 1 -->
-                <div class="key"><div class="main-legend">^</div></div>
-                <div class="key"><div class="main-legend">&</div></div>
-                <div class="key"><div class="main-legend">*</div></div>
-                <div class="key"><div class="main-legend">(</div></div>
-                <div class="key"><div class="main-legend">)</div></div>
-                <div class="key mod"><div class="main-legend">BKSP</div></div>
-
-                <!-- Row 2 -->
-                <div class="key"><div class="main-legend">←</div></div>
-                <div class="key"><div class="main-legend">↓</div></div>
-                <div class="key"><div class="main-legend">↑</div></div>
-                <div class="key"><div class="main-legend">→</div></div>
-                <div class="key"><div class="main-legend">HOME</div></div>
-                <div class="key"><div class="main-legend">END</div></div>
-
-                <!-- Row 3 -->
-                <div class="key"><div class="main-legend">INS</div></div>
-                <div class="key"><div class="main-legend">PgUp</div></div>
-                <div class="key"><div class="main-legend">PgDn</div></div>
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-
+                <!-- R1 -->
+                <div class="key"><span class="key-index">18</span><div class="main-legend">6</div><div class="sub-legend">^</div></div>
+                <div class="key"><span class="key-index">19</span><div class="main-legend">7</div><div class="sub-legend">&</div></div>
+                <div class="key"><span class="key-index">20</span><div class="main-legend">8</div><div class="sub-legend">*</div></div>
+                <div class="key"><span class="key-index">21</span><div class="main-legend">9</div><div class="sub-legend">(</div></div>
+                <div class="key"><span class="key-index">22</span><div class="main-legend">0</div><div class="sub-legend">)</div></div>
+                <div class="key mod"><span class="key-index">23</span><div class="main-legend">BSPC</div></div>
+                <!-- R2 -->
+                <div class="key"><span class="key-index">24</span><div class="main-legend">←</div></div>
+                <div class="key"><span class="key-index">25</span><div class="main-legend">↓</div></div>
+                <div class="key"><span class="key-index">26</span><div class="main-legend">↑</div></div>
+                <div class="key"><span class="key-index">27</span><div class="main-legend">→</div></div>
+                <div class="key"><span class="key-index">28</span><div class="main-legend">HOME</div></div>
+                <div class="key"><span class="key-index">29</span><div class="main-legend">END</div></div>
+                <!-- R3 -->
+                <div class="key"><span class="key-index">30</span><div class="main-legend">INS</div></div>
+                <div class="key"><span class="key-index">31</span><div class="main-legend">PgUp</div></div>
+                <div class="key"><span class="key-index">32</span><div class="main-legend">PgDn</div></div>
+                <div class="key transparent"><span class="key-index">33</span></div>
+                <div class="key transparent"><span class="key-index">34</span></div>
+                <div class="key transparent"><span class="key-index">35</span></div>
                 <!-- Thumbs -->
-                <div class="key thumb-key"><div class="main-legend">ENT</div></div>
-                <div class="key thumb-key transparent"></div>
-                <div class="key thumb-key mod"><div class="main-legend">RALT</div></div>
-                <div class="thumb-placeholder"></div>
+                <div class="key"><span class="key-index">39</span><div class="main-legend">ENT</div></div>
+                <div class="key transparent"><span class="key-index">40</span></div>
+                <div class="key mod"><span class="key-index">41</span><div class="main-legend">RALT</div></div>
+                <div class="thumb-spacer"></div>
             </div>
         </div>
     </div>
 
-    <!-- LAYER 3: FN / MEDIA / RGB -->
+    <!-- LAYER 3: FN -->
     <div class="layer-container">
-        <div class="layer-title">Capa 3: Funciones & RGB</div>
+        <div class="layer-title">Capa 3: Funciones & Multimedia</div>
         <div class="keyboard">
             <div class="half left">
-                <!-- Row 1 -->
-                <div class="key"><div class="main-legend">F1</div></div>
-                <div class="key"><div class="main-legend">F2</div></div>
-                <div class="key"><div class="main-legend">F3</div></div>
-                <div class="key"><div class="main-legend">F4</div></div>
-                <div class="key"><div class="main-legend">F5</div></div>
-                <div class="key"><div class="main-legend">F6</div></div>
-                
-                <!-- Row 2 -->
-                <div class="key transparent"></div>
-                <div class="key"><div class="main-legend">Play</div></div>
-                <div class="key"><div class="main-legend">Prev</div></div>
-                <div class="key"><div class="main-legend">Next</div></div>
-                <div class="key"><div class="main-legend">Mute</div></div>
-                <div class="key"><div class="main-legend">Vol-</div></div>
-
-                <!-- Row 3 -->
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-
+                <!-- R1 -->
+                <div class="key"><span class="key-index">0</span><div class="main-legend">F1</div></div>
+                <div class="key"><span class="key-index">1</span><div class="main-legend">F2</div></div>
+                <div class="key"><span class="key-index">2</span><div class="main-legend">F3</div></div>
+                <div class="key"><span class="key-index">3</span><div class="main-legend">F4</div></div>
+                <div class="key"><span class="key-index">4</span><div class="main-legend">F5</div></div>
+                <div class="key"><span class="key-index">5</span><div class="main-legend">F6</div></div>
+                <!-- R2 -->
+                <div class="key transparent"><span class="key-index">6</span></div>
+                <div class="key"><span class="key-index">7</span><div class="main-legend">PLAY</div></div>
+                <div class="key"><span class="key-index">8</span><div class="main-legend">PREV</div></div>
+                <div class="key"><span class="key-index">9</span><div class="main-legend">NEXT</div></div>
+                <div class="key"><span class="key-index">10</span><div class="main-legend">MUTE</div></div>
+                <div class="key"><span class="key-index">11</span><div class="main-legend">VOL-</div></div>
+                <!-- R3 -->
+                <div class="key transparent"><span class="key-index">12</span></div>
+                <div class="key transparent"><span class="key-index">13</span></div>
+                <div class="key transparent"><span class="key-index">14</span></div>
+                <div class="key transparent"><span class="key-index">15</span></div>
+                <div class="key transparent"><span class="key-index">16</span></div>
+                <div class="key transparent"><span class="key-index">17</span></div>
                 <!-- Thumbs -->
-                <div class="thumb-placeholder"></div>
-                <div class="key thumb-key mod"><div class="main-legend">GUI</div></div>
-                <div class="key thumb-key transparent"></div>
-                <div class="key thumb-key"><div class="main-legend">SPC</div></div>
+                <div class="thumb-spacer"></div>
+                <div class="key mod"><span class="key-index">36</span><div class="main-legend">GUI</div></div>
+                <div class="key transparent"><span class="key-index">37</span></div>
+                <div class="key"><span class="key-index">38</span><div class="main-legend">SPC</div></div>
             </div>
 
             <div class="half right">
-                <!-- Row 1 -->
-                <div class="key"><div class="main-legend">F7</div></div>
-                <div class="key"><div class="main-legend">F8</div></div>
-                <div class="key"><div class="main-legend">F9</div></div>
-                <div class="key"><div class="main-legend">F10</div></div>
-                <div class="key"><div class="main-legend">F11</div></div>
-                <div class="key"><div class="main-legend">F12</div></div>
-
-                <!-- Row 2 -->
-                <div class="key"><div class="main-legend">Vol+</div></div>
-                <div class="key"><div class="main-legend">RGB</div><div class="sub-legend">Tog</div></div>
-                <div class="key"><div class="main-legend">Sat+</div></div>
-                <div class="key"><div class="main-legend">Val+</div></div>
-                <div class="key"><div class="main-legend">Hue+</div></div>
-                <div class="key"><div class="main-legend">Mod+</div></div>
-
-                <!-- Row 3 -->
-                <div class="key transparent"></div>
-                <div class="key"><div class="main-legend">Sat-</div></div>
-                <div class="key"><div class="main-legend">Val-</div></div>
-                <div class="key"><div class="main-legend">Hue-</div></div>
-                <div class="key"><div class="main-legend">Mod+</div></div>
-                <div class="key transparent"></div>
-
+                <!-- R1 -->
+                <div class="key"><span class="key-index">18</span><div class="main-legend">F7</div></div>
+                <div class="key"><span class="key-index">19</span><div class="main-legend">F8</div></div>
+                <div class="key"><span class="key-index">20</span><div class="main-legend">F9</div></div>
+                <div class="key"><span class="key-index">21</span><div class="main-legend">F10</div></div>
+                <div class="key"><span class="key-index">22</span><div class="main-legend">F11</div></div>
+                <div class="key"><span class="key-index">23</span><div class="main-legend">F12</div></div>
+                <!-- R2 -->
+                <div class="key"><span class="key-index">24</span><div class="main-legend">VOL+</div></div>
+                <div class="key"><span class="key-index">25</span><div class="main-legend">RGB</div><div class="sub-legend">TOG</div></div>
+                <div class="key"><span class="key-index">26</span><div class="main-legend">SAT+</div></div>
+                <div class="key"><span class="key-index">27</span><div class="main-legend">VAL+</div></div>
+                <div class="key"><span class="key-index">28</span><div class="main-legend">HUE+</div></div>
+                <div class="key"><span class="key-index">29</span><div class="main-legend">MOD+</div></div>
+                <!-- R3 -->
+                <div class="key transparent"><span class="key-index">30</span></div>
+                <div class="key"><span class="key-index">31</span><div class="main-legend">SAT-</div></div>
+                <div class="key"><span class="key-index">32</span><div class="main-legend">VAL-</div></div>
+                <div class="key"><span class="key-index">33</span><div class="main-legend">HUE-</div></div>
+                <div class="key"><span class="key-index">34</span><div class="main-legend">MOD-</div></div>
+                <div class="key transparent"><span class="key-index">35</span></div>
                 <!-- Thumbs -->
-                <div class="key thumb-key"><div class="main-legend">ENT</div></div>
-                <div class="key thumb-key transparent"></div>
-                <div class="key thumb-key mod"><div class="main-legend">RALT</div></div>
-                <div class="thumb-placeholder"></div>
+                <div class="key"><span class="key-index">39</span><div class="main-legend">ENT</div></div>
+                <div class="key transparent"><span class="key-index">40</span></div>
+                <div class="key mod"><span class="key-index">41</span><div class="main-legend">RALT</div></div>
+                <div class="thumb-spacer"></div>
             </div>
         </div>
     </div>
 
-    <!-- LAYER 4: ADMIN / MOUSE -->
+    <!-- LAYER 4: ADMIN -->
     <div class="layer-container">
-        <div class="layer-title">Capa 4: Admin & Mouse (Espacio + Enter)</div>
+        <div class="layer-title">Capa 4: Admin (Combo: SPC + ENT)</div>
         <div class="keyboard">
             <div class="half left">
-                <!-- Row 1 -->
-                <div class="key" style="background:#ffcdd2"><div class="main-legend">BOOT</div></div>
-                <div class="key"><div class="main-legend">ALT</div><div class="sub-legend">F4</div></div>
-                <div class="key"><div class="main-legend">Undo</div></div>
-                <div class="key"><div class="main-legend">Cut</div></div>
-                <div class="key"><div class="main-legend">Copy</div></div>
-                <div class="key"><div class="main-legend">Pste</div></div>
-                
-                <!-- Row 2 -->
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-                <div class="key"><div class="main-legend">CTL</div><div class="sub-legend">Bspc</div></div>
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-
-                <!-- Row 3 -->
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-
+                <!-- R1 -->
+                <div class="key admin"><span class="key-index">0</span><div class="main-legend">BOOT</div></div>
+                <div class="key"><span class="key-index">1</span><div class="main-legend">ALT</div><div class="sub-legend">F4</div></div>
+                <div class="key"><span class="key-index">2</span><div class="main-legend">UNDO</div></div>
+                <div class="key"><span class="key-index">3</span><div class="main-legend">CUT</div></div>
+                <div class="key"><span class="key-index">4</span><div class="main-legend">COPY</div></div>
+                <div class="key"><span class="key-index">5</span><div class="main-legend">PSTE</div></div>
+                <!-- R2 -->
+                <div class="key transparent"><span class="key-index">6</span></div>
+                <div class="key transparent"><span class="key-index">7</span></div>
+                <div class="key transparent"><span class="key-index">8</span></div>
+                <div class="key"><span class="key-index">9</span><div class="main-legend">CTL</div><div class="sub-legend">BSPC</div></div>
+                <div class="key transparent"><span class="key-index">10</span></div>
+                <div class="key transparent"><span class="key-index">11</span></div>
+                <!-- R3 -->
+                <div class="key transparent"><span class="key-index">12</span></div>
+                <div class="key transparent"><span class="key-index">13</span></div>
+                <div class="key transparent"><span class="key-index">14</span></div>
+                <div class="key transparent"><span class="key-index">15</span></div>
+                <div class="key transparent"><span class="key-index">16</span></div>
+                <div class="key transparent"><span class="key-index">17</span></div>
                 <!-- Thumbs -->
-                <div class="thumb-placeholder"></div>
-                <div class="key thumb-key mod"><div class="main-legend">GUI</div></div>
-                <div class="key thumb-key transparent"></div>
-                <div class="key thumb-key"><div class="main-legend">SPC</div></div>
+                <div class="thumb-spacer"></div>
+                <div class="key mod"><span class="key-index">36</span><div class="main-legend">GUI</div></div>
+                <div class="key transparent"><span class="key-index">37</span></div>
+                <div class="key"><span class="key-index">38</span><div class="main-legend">SPC</div></div>
             </div>
 
             <div class="half right">
-                <!-- Row 1 -->
-                <div class="key transparent"></div>
-                <div class="key"><div class="main-legend">BTN1</div></div>
-                <div class="key"><div class="main-legend">M_UP</div></div>
-                <div class="key"><div class="main-legend">BTN2</div></div>
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-
-                <!-- Row 2 -->
-                <div class="key transparent"></div>
-                <div class="key"><div class="main-legend">M_L</div></div>
-                <div class="key"><div class="main-legend">M_DN</div></div>
-                <div class="key"><div class="main-legend">M_R</div></div>
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-
-                <!-- Row 3 -->
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-                <div class="key transparent"></div>
-
+                <!-- R1 -->
+                <div class="key transparent"><span class="key-index">18</span></div>
+                <div class="key"><span class="key-index">19</span><div class="main-legend">BTN1</div></div>
+                <div class="key"><span class="key-index">20</span><div class="main-legend">M_UP</div></div>
+                <div class="key"><span class="key-index">21</span><div class="main-legend">BTN2</div></div>
+                <div class="key transparent"><span class="key-index">22</span></div>
+                <div class="key transparent"><span class="key-index">23</span></div>
+                <!-- R2 -->
+                <div class="key transparent"><span class="key-index">24</span></div>
+                <div class="key"><span class="key-index">25</span><div class="main-legend">M_L</div></div>
+                <div class="key"><span class="key-index">26</span><div class="main-legend">M_DN</div></div>
+                <div class="key"><span class="key-index">27</span><div class="main-legend">M_R</div></div>
+                <div class="key transparent"><span class="key-index">28</span></div>
+                <div class="key transparent"><span class="key-index">29</span></div>
+                <!-- R3 -->
+                <div class="key transparent"><span class="key-index">30</span></div>
+                <div class="key transparent"><span class="key-index">31</span></div>
+                <div class="key transparent"><span class="key-index">32</span></div>
+                <div class="key transparent"><span class="key-index">33</span></div>
+                <div class="key transparent"><span class="key-index">34</span></div>
+                <div class="key transparent"><span class="key-index">35</span></div>
                 <!-- Thumbs -->
-                <div class="key thumb-key"><div class="main-legend">ENT</div></div>
-                <div class="key thumb-key transparent"></div>
-                <div class="key thumb-key mod"><div class="main-legend">RALT</div></div>
-                <div class="thumb-placeholder"></div>
+                <div class="key"><span class="key-index">39</span><div class="main-legend">ENT</div></div>
+                <div class="key transparent"><span class="key-index">40</span></div>
+                <div class="key mod"><span class="key-index">41</span><div class="main-legend">RALT</div></div>
+                <div class="thumb-spacer"></div>
             </div>
-        </div>
-        <div class="combos-info">
-            Esta capa se activa manteniendo <b>Espacio + Enter</b>
         </div>
     </div>
 
