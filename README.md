@@ -64,50 +64,57 @@ qmk flash -kb crkbd -km Yariel
 
 ## 🗺️ Distribución de Capas
 
+> **Nota sobre índices:** Los números pequeños indican la posición física de la tecla (0-41) para referencia en programación.
+
 ### Capa 0: Base (QWERTY)
 *La capa principal con modificadores en la fila central (Home Row Mods).*
 
 | L-Lado | Q | W | E | R | T | | Y | U | I | O | P | BKSP |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **TAB** | A/GUI | S/ALT | D/CTL | F/SFT | G | | H | J/SFT | K/CTL | L/ALT | ;/GUI | ' |
-| **SFT** | Z | X | C | V | B | | N | M | , | . | / | L3/FN |
-| | | **GUI** | **L1/Num**| **SPC** | | | **ENT** | **L2/Sym**| **RALT** | | | |
+| **0-5** | ESC | Q | W | E | R | T | | Y | U | I | O | P | BSPC |
+| **6-11** | **TAB** | A/GUI | S/ALT | D/CTL | F/SFT | G | | H | J/SFT | K/CTL | L/ALT | ;/GUI | ' |
+| **12-17** | **SFT** | Z | X | C | V | B | | N | M | , | . | / | L3/FN |
+| **Thmb** | | | **36:GUI** | **37:L1**| **38:SPC** | | **39:ENT** | **40:L2**| **41:RALT** | | | |
 
 ### Capa 1: Calculadora & Números
 *Activada con el pulgar izquierdo (`L1`).*
 
 | L-Lado | . | . | . | . | . | | NUM | 7 | 8 | 9 | * | DEL |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **CAPS** | . | . | . | . | . | | . | 4 | 5 | 6 | + | - |
-| . | . | . | . | . | . | | . | 1 | 2 | 3 | . | / |
-| | | . | . | **SPC** | | | **ENT** | **L3** | **0** | | | |
+| **0-5** | . | . | . | . | . | . | | NUM | 7 | 8 | 9 | * | DEL |
+| **6-11** | **CAPS** | . | . | . | . | . | | . | 4 | 5 | 6 | + | - |
+| **12-17** | . | . | . | . | . | . | | . | 1 | 2 | 3 | . | / |
+| **Thmb** | | | . | . | **SPC** | | **ENT** | **L3** | **0** | | | |
 
 ### Capa 2: Símbolos & Navegación
 *Activada con el pulgar derecho (`L2`).*
 
 | L-Lado | ` | ! | @ | # | $ | % | | ^ | & | * | ( | ) | BKSP |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| . | -/GUI | =/ALT | {/CTL | }/SFT | \ | | ← | ↓ | ↑ | → | HOME | END |
-| . | _ | + | [ | ] | \ | | INS | PGUP | PGDN | . | . | . |
-| | | **GUI** | **L3** | **SPC** | | | **ENT** | . | **RALT** | | | |
+| **0-5** | ` | ! | @ | # | $ | % | | ^ | & | * | ( | ) | BSPC |
+| **6-11** | . | -/GUI | =/ALT | {/CTL | }/SFT | \ | | ← | ↓ | ↑ | → | HOME | END |
+| **12-17** | . | _ | + | [ | ] | \ | | INS | PGUP | PGDN | . | . | . |
+| **Thmb** | | | **GUI** | **L3** | **SPC** | | **ENT** | . | **RALT** | | | |
 
 ### Capa 3: Funciones & RGB
 *Activada con `MO(3)` o combinaciones de pulgares.*
 
 | L-Lado | F1 | F2 | F3 | F4 | F5 | F6 | | F7 | F8 | F9 | F10 | F11 | F12 |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| . | PLAY | PREV | NEXT | MUTE | VOL- | | VOL+ | RGB_TG | SAT+ | VAL+ | HUE+ | MOD+ |
-| . | . | . | . | . | . | | . | SAT- | VAL- | HUE- | MOD- | . |
-| | | **GUI** | . | **SPC** | | | **ENT** | . | **RALT** | | | |
+| **0-5** | F1 | F2 | F3 | F4 | F5 | F6 | | F7 | F8 | F9 | F10 | F11 | F12 |
+| **6-11** | . | PLAY | PREV | NEXT | MUTE | VOL- | | VOL+ | RGB_TG | SAT+ | VAL+ | HUE+ | MOD+ |
+| **12-17** | . | . | . | . | . | . | | . | SAT- | VAL- | HUE- | MOD- | . |
+| **Thmb** | | | **GUI** | . | **SPC** | | **ENT** | . | **RALT** | | | |
 
 ### Capa 4: Administración & Mouse
 *Activada manteniendo **Espacio + Enter**.*
 
-| L-Lado | **RESET** | Alt+F4 | UNDO | CUT | COPY | PASTE | | . | BTN1 | M_UP | BTN2 | . | . |
+| L-Lado | RESET | Alt+F4 | UNDO | CUT | COPY | PSTE | | . | BTN1 | M_UP | BTN2 | . | . |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| . | . | . | . | Ctl+BS | . | . | | . | M_LFT | M_DWN | M_RGHT | . | . |
-| . | . | . | . | . | . | . | | . | . | . | . | . | . |
-| | | **GUI** | . | **SPC** | | | **ENT** | . | **RALT** | | | |
+| **0-5** | **RESET** | Alt+F4 | UNDO | CUT | COPY | PSTE | | . | BTN1 | M_UP | BTN2 | . | . |
+| **6-11** | . | . | . | Ctl+BS | . | . | | . | M_LFT | M_DWN | M_RGHT | . | . |
+| **12-17** | . | . | . | . | . | . | | . | . | . | . | . | . |
+| **Thmb** | | | **GUI** | . | **SPC** | | **ENT** | . | **RALT** | | | |
 
 ---
 
