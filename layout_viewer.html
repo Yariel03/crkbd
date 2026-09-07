@@ -120,13 +120,65 @@
             margin-bottom: 20px;
             border-radius: 5px;
         }
+
+        /* Estilos para la sección de Combos */
+        .combos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 12px;
+            margin-top: 15px;
+            text-align: left;
+        }
+
+        .combo-card {
+            background: #fafafa;
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 2px 2px 0px rgba(0,0,0,0.15);
+        }
+
+        .combo-keys {
+            font-weight: bold;
+            font-size: 0.9em;
+            background: #e3f2fd;
+            color: #0d47a1;
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid #90caf9;
+        }
+
+        .combo-arrow {
+            font-weight: bold;
+            color: #777;
+            margin: 0 6px;
+        }
+
+        .combo-result {
+            font-weight: bold;
+            font-size: 1.15em;
+            color: #d32f2f;
+            background: #fff;
+            padding: 3px 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .combo-desc {
+            font-size: 0.72em;
+            color: #555;
+            margin-top: 4px;
+        }
     </style>
 </head>
 <body>
 
     <div class="no-print">
         <h1>Diseño Corne - Yariel</h1>
-        <p>Configuración v2.2 - Símbolos Shift visibles</p>
+        <p>Configuración v3.0 - Optimizado para Arch + Hyprland + Neovim + Tmux</p>
         <button class="print-btn" onclick="window.print()">🖨️ Imprimir PDF</button>
     </div>
 
@@ -260,7 +312,7 @@
 
     <!-- LAYER 2: SYMBOLS -->
     <div class="layer-container">
-        <div class="layer-title">Capa 2: Símbolos & Navegación</div>
+        <div class="layer-title">Capa 2: Símbolos & Navegación Vim (Hyprland Workspaces)</div>
         <div class="keyboard">
             <div class="half left">
                 <!-- R1 -->
@@ -276,7 +328,7 @@
                 <div class="key hold"><div class="main-legend">=</div><div class="mod-legend">ALT</div></div>
                 <div class="key hold"><div class="main-legend">{</div><div class="mod-legend">CTL</div></div>
                 <div class="key hold"><div class="main-legend">}</div><div class="mod-legend">SFT</div></div>
-                <div class="key"><div class="main-legend">\</div></div>
+                <div class="key"><div class="main-legend">|</div></div>
                 <!-- R3 -->
                 <div class="key transparent"></div>
                 <div class="key"><div class="main-legend">_</div></div>
@@ -446,6 +498,77 @@
                 <div class="key transparent"></div>
                 <div class="key mod"><div class="main-legend">RALT</div></div>
                 <div class="thumb-spacer"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- COMBOS SECTION -->
+    <div class="layer-container">
+        <div class="layer-title">⚡ Combos del Sistema (Capa Base)</div>
+        <div class="combos-grid">
+            <div class="combo-card">
+                <div>
+                    <span class="combo-keys">R + T</span>
+                    <div class="combo-desc">Paréntesis apertura</div>
+                </div>
+                <span class="combo-arrow">→</span>
+                <span class="combo-result">(</span>
+            </div>
+            <div class="combo-card">
+                <div>
+                    <span class="combo-keys">Y + U</span>
+                    <div class="combo-desc">Paréntesis cierre</div>
+                </div>
+                <span class="combo-arrow">→</span>
+                <span class="combo-result">)</span>
+            </div>
+            <div class="combo-card">
+                <div>
+                    <span class="combo-keys">F + G</span>
+                    <div class="combo-desc">Llave apertura</div>
+                </div>
+                <span class="combo-arrow">→</span>
+                <span class="combo-result">{</span>
+            </div>
+            <div class="combo-card">
+                <div>
+                    <span class="combo-keys">H + J</span>
+                    <div class="combo-desc">Llave cierre</div>
+                </div>
+                <span class="combo-arrow">→</span>
+                <span class="combo-result">}</span>
+            </div>
+            <div class="combo-card">
+                <div>
+                    <span class="combo-keys">V + B</span>
+                    <div class="combo-desc">Corchete apertura</div>
+                </div>
+                <span class="combo-arrow">→</span>
+                <span class="combo-result">[</span>
+            </div>
+            <div class="combo-card">
+                <div>
+                    <span class="combo-keys">N + M</span>
+                    <div class="combo-desc">Corchete cierre</div>
+                </div>
+                <span class="combo-arrow">→</span>
+                <span class="combo-result">]</span>
+            </div>
+            <div class="combo-card">
+                <div>
+                    <span class="combo-keys">. + /</span>
+                    <div class="combo-desc">Flecha JS/TS</div>
+                </div>
+                <span class="combo-arrow">→</span>
+                <span class="combo-result">=&gt;{}</span>
+            </div>
+            <div class="combo-card">
+                <div>
+                    <span class="combo-keys">SPC + ENT</span>
+                    <div class="combo-desc">Admin / Mouse</div>
+                </div>
+                <span class="combo-arrow">→</span>
+                <span class="combo-result">Capa 4</span>
             </div>
         </div>
     </div>

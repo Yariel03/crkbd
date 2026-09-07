@@ -1,12 +1,13 @@
 # ⌨️ Teclado Corne - Configuración "Yariel"
 
-Este repositorio contiene la configuración personalizada para el teclado **Corne (crkbd)**, optimizada para productividad, programación y control multimedia.
+Este repositorio contiene la configuración personalizada para el teclado **Corne (crkbd rev1)**, optimizada para desarrollo de software en **Arch Linux**, **Hyprland (Tiling WM)**, **Neovim** y **Tmux**.
 
 ## 🚀 Características Principales
-- **OLED Optimizado:** Pantalla secundaria con letrero marquesina que respeta el tiempo de apagado (`OLED_TIMEOUT`).
-- **Combos Inteligentes:** Acceso rápido a retroceso, flechas de código y capas administrativas.
-- **Home Row Mods:** Modificadores (GUI, ALT, CTRL, SFT) integrados en las teclas base para evitar fatiga.
-- **5 Capas Especializadas:** Desde calculadora hasta control de mouse.
+- **Suite Simétrica de Delimitadores en Combos:** Paréntesis `()`, llaves `{}` y corchetes `[]` accesibles directamente en las 3 filas interiores de la Capa 0 sin cambiar de capa ni pulsar Shift.
+- **Optimizado para Hyprland (Workspaces con Pulgares):** Cambio ágil entre los workspaces `1..0` mediante `MO(2)` (pulgar derecho) + `Super` (pulgar izquierdo) + número en fila superior.
+- **Navegación Vim en Capa 2:** Flechas `LEFT, DOWN, UP, RIGHT` posicionadas sobre `H, J, K, L` en la mano derecha.
+- **Home Row Mods (GACS):** Modificadores en la fila de descanso en Capa 0 y en Capa 2 (para mover ventanas en Hyprland y seleccionar texto con flechas Vim).
+- **OLED Animado y Útil:** Pantalla maestra muestra estado de capa y bloqueos; pantalla esclava muestra animación marquesina (`@yariel_dev`).
 
 ---
 
@@ -86,13 +87,16 @@ qmk flash -kb crkbd -km Yariel
 | **12-17** | . | . | . | . | . | . | | . | 1 | 2 | 3 | . | / |
 | **Thmb** | | | . | . | **SPC** | | **ENT** | **L3** | **0** | | | |
 
-### Capa 2: Símbolos & Navegación
-*Activada con el pulgar derecho (`L2`).*
+### Capa 2: Símbolos, Hyprland & Navegación Vim
+*Activada con el pulgar derecho (`MO(2)`).*
+- **Fila superior (1..0):** Workspaces de Hyprland (`MO(2)` derecho + `Super` izquierdo + número).
+- **Mano izquierda:** Home Row Mods (`GUI`, `ALT`, `CTL`, `SFT`). Interceptados en `process_record_user` para enviar `{` y `}` al pulsar rápido, y `Ctrl`/`Shift` al sostener.
+- **Mano derecha:** Flechas Vim (`H, J, K, L` $\rightarrow$ `←, ↓, ↑, →`). Mueve ventanas en Hyprland o selecciona texto en Neovim con `Shift + flechas`.
 
 | L-Lado | ` | ! | @ | # | $ | % | | ^ | & | * | ( | ) | BKSP |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | **0-5** | ` / ~ | 1 | 2 | 3 | 4 | 5 | | 6 | 7 | 8 | 9 | 0 | BSPC |
-| **6-11** | . | -/GUI | =/ALT | {/CTL | }/SFT | \ | | ← | ↓ | ↑ | → | HOME | END |
+| **6-11** | . | -/GUI | =/ALT | {/CTL | }/SFT | \| | | ← | ↓ | ↑ | → | HOME | END |
 | **12-17** | . | _ | + | [ | ] | \ | | INS | PGUP | PGDN | . | . | . |
 | **Thmb** | | | **GUI** | **L3** | **SPC** | | **ENT** | . | **RALT** | | | |
 
@@ -118,12 +122,19 @@ qmk flash -kb crkbd -km Yariel
 
 ---
 
-## ⚡ Combos de Teclado
-| Teclas | Acción | Descripción |
-| :--- | :--- | :--- |
-| `SPC` + `ENT` | **MO(4)** | Acceso a capa administrativa y mouse |
-| `.` + `/` | **=>{}** | Atajo para funciones flecha en JavaScript/TS |
-| `H` + `J` | **BSPC** | Retroceso sin mover la mano de la posición base |
+## ⚡ Combos de Teclado (Capa 0)
+Todos los combos se activan pulsando ambas teclas al mismo tiempo:
+
+| Teclas | Salida / Acción | Descripción / Caso de Uso |
+| :--- | :---: | :--- |
+| `R` + `T` | **`(`** | Paréntesis de apertura |
+| `Y` + `U` | **`)`** | Paréntesis de cierre |
+| `F` + `G` | **`{`** | Llave de apertura |
+| `H` + `J` | **`}`** | Llave de cierre |
+| `V` + `B` | **`[`** | Corchete de apertura |
+| `N` + `M` | **`]`** | Corchete de cierre |
+| `.` + `/` | **`=>{}`** | Atajo para funciones flecha en JavaScript/TS |
+| `SPC` + `ENT` | **`MO(4)`** | Capa 4 (Admin, accesos de sistema y mouse) |
 
 ---
 

@@ -26,17 +26,32 @@ enum custom_keycodes {
 enum combos {
   COMBO_LAYER_4,
   CB_ARROW,  // . + / = Flecha JS (= >)
-  CB_BKSP    // H + J = Backspace (Opcional, muy cómodo)
+  CB_LPRN,   // R + T = (
+  CB_RPRN,   // Y + U = )
+  CB_LCBR,   // F + G = {
+  CB_RCBR,   // H + J = }
+  CB_LBRC,   // V + B = [
+  CB_RBRC    // N + M = ]
 };
 
 const uint16_t PROGMEM space_enter_combo[] = {KC_SPC, KC_ENT, COMBO_END};
-const uint16_t PROGMEM arrow_combo[] = {KC_DOT, KC_SLSH, COMBO_END};
-const uint16_t PROGMEM bksp_combo[]  = {KC_H, KC_J, COMBO_END};
+const uint16_t PROGMEM arrow_combo[]       = {KC_DOT, KC_SLSH, COMBO_END};
+const uint16_t PROGMEM lprn_combo[]        = {KC_R, KC_T, COMBO_END};
+const uint16_t PROGMEM rprn_combo[]        = {KC_Y, KC_U, COMBO_END};
+const uint16_t PROGMEM fg_combo[]          = {LSFT_T(KC_F), KC_G, COMBO_END};
+const uint16_t PROGMEM hj_combo[]          = {KC_H, RSFT_T(KC_J), COMBO_END};
+const uint16_t PROGMEM lbrc_combo[]        = {KC_V, KC_B, COMBO_END};
+const uint16_t PROGMEM rbrc_combo[]        = {KC_N, KC_M, COMBO_END};
 
 combo_t key_combos[] = {
   [COMBO_LAYER_4] = COMBO(space_enter_combo, MO(4)),
-  [CB_ARROW] = COMBO(arrow_combo, MC_ARROW),
-  [CB_BKSP] = COMBO(bksp_combo, KC_BSPC),
+  [CB_ARROW]      = COMBO(arrow_combo, MC_ARROW),
+  [CB_LPRN]       = COMBO(lprn_combo, KC_LPRN),
+  [CB_RPRN]       = COMBO(rprn_combo, KC_RPRN),
+  [CB_LCBR]       = COMBO(fg_combo, KC_LCBR),
+  [CB_RCBR]       = COMBO(hj_combo, KC_RCBR),
+  [CB_LBRC]       = COMBO(lbrc_combo, KC_LBRC),
+  [CB_RBRC]       = COMBO(rbrc_combo, KC_RBRC),
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -46,6 +61,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         SEND_STRING("=>{}");
       }
       return false;
+    case LCTL_T(KC_LCBR):
+      if (record->tap.count && record->event.pressed) {
+        tap_code16(KC_LCBR);
+        return false;
+      }
+      break;
+    case LSFT_T(KC_RCBR):
+      if (record->tap.count && record->event.pressed) {
+        tap_code16(KC_RCBR);
+        return false;
+      }
+      break;
   }
   return true;
 }
@@ -79,7 +106,7 @@ KC_TAB, LGUI_T(KC_A),LALT_T(KC_S),LCTL_T(KC_D),LSFT_T(KC_F),KC_G,           KC_H
   //,-----------------------------------------------------.                    ,-----------------------------------------------------
        KC_GRV,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-_______, LGUI_T(KC_MINS), LALT_T(KC_EQL), LCTL_T(KC_LCBR), LSFT_T(KC_RCBR), KC_BSLS,                      KC_LEFT,  KC_DOWN, KC_UP, KC_RIGHT, KC_HOME,  KC_END,
+_______, LGUI_T(KC_MINS), LALT_T(KC_EQL), LCTL_T(KC_LCBR), LSFT_T(KC_RCBR), KC_PIPE,                      KC_LEFT,  KC_DOWN, KC_UP, KC_RIGHT, KC_HOME,  KC_END,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, KC_UNDS, KC_PLUS, KC_LBRC, KC_RBRC, KC_BSLS,                      KC_INS,KC_PGUP, KC_PGDN, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
