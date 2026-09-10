@@ -77,6 +77,27 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
+bool led_update_user(led_t led_state) {
+    static bool numlock_initialized = false;
+    if (!numlock_initialized) {
+        numlock_initialized = true;
+        if (!led_state.num_lock) {
+            tap_code(KC_NUM_LOCK);
+        }
+    }
+    return true;
+}
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+    if (get_highest_layer(state) == 1) {
+        if (!host_keyboard_led_state().num_lock) {
+            tap_code(KC_NUM_LOCK);
+        }
+    }
+    return state;
+}
+
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------
